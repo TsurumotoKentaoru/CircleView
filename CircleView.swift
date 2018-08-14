@@ -1,6 +1,6 @@
 //
 //  CircleView.swift
-//  Template
+//  
 //
 //  Created by 鶴本賢太朗 on 2018/08/14.
 //  Copyright © 2018年 Kentarou. All rights reserved.
@@ -11,10 +11,28 @@ import UIKit
 // 円を描画するView
 class CircleView: UIView {
     
-    private var circleLayer: CAShapeLayer
-    internal var borderColor: UIColor = .clear  // 輪郭の色
-    internal var fillColor: UIColor = .white    // 円の中の色
-    internal var lineWidth: CGFloat = 0         // 輪郭の太さ
+    private let circleLayer: CAShapeLayer
+    
+    // 輪郭の色
+    internal var borderColor: UIColor = .clear {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    // 円の中の色
+    internal var fillColor: UIColor = .white {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    // 輪郭の太さ
+    internal var lineWidth: CGFloat = 0 {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
     
     override init(frame: CGRect) {
         self.circleLayer = CAShapeLayer()
