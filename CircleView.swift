@@ -6,6 +6,8 @@
 //  Copyright © 2018年 Kentarou. All rights reserved.
 //
 
+import UIKit
+
 // 円を描画するView
 class CircleView: UIView {
     
