@@ -13,7 +13,7 @@ class CircleView: UIView {
     
     private var circleLayer: CAShapeLayer
     internal var borderColor: UIColor = .clear  // 輪郭の色
-    internal var fillColor: UIColor = .white      // 円の中の色
+    internal var fillColor: UIColor = .white    // 円の中の色
     internal var lineWidth: CGFloat = 0         // 輪郭の太さ
     
     override init(frame: CGRect) {
