@@ -11,46 +11,28 @@ import UIKit
 // 円を描画するView
 class CircleView: UIView {
     
-    private let circleLayer: CAShapeLayer
+    internal var strokeColor: UIColor = .white
+    internal var fillColor: UIColor = .white
+    internal var lineWidth: CGFloat = 0
     
-    // 輪郭の色
-    internal var borderColor: UIColor = .clear {
-        didSet {
-            self.setNeedsDisplay()
-        }
+    override class var layerClass: AnyClass {
+        return CAShapeLayer.self
     }
-    
-    // 円の中の色
-    internal var fillColor: UIColor = .white {
-        didSet {
-            self.setNeedsDisplay()
-        }
+    private var shapeLayer: CAShapeLayer {
+        return self.layer as! CAShapeLayer
     }
-    
-    // 輪郭の太さ
-    internal var lineWidth: CGFloat = 0 {
-        didSet {
-            self.setNeedsDisplay()
-        }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.setLayerPath()
     }
-    
-    override init(frame: CGRect) {
-        self.circleLayer = CAShapeLayer()
-        super.init(frame: frame)
-        self.layer.addSublayer(circleLayer)
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        self.circleLayer = CAShapeLayer()
-        super.init(coder: aDecoder)!
-        self.layer.addSublayer(circleLayer)
-    }
-    
-    override func draw(_ rect: CGRect) {
-        self.circleLayer.frame = self.bounds
-        self.circleLayer.strokeColor = self.borderColor.cgColor
-        self.circleLayer.fillColor = self.fillColor.cgColor
-        self.circleLayer.lineWidth = self.lineWidth
-        self.circleLayer.path = UIBezierPath(ovalIn: self.bounds).cgPath
+}
+
+extension CircleView {
+    private func setLayerPath() {
+        self.shapeLayer.strokeColor = self.strokeColor.cgColor
+        self.shapeLayer.fillColor = self.fillColor.cgColor
+        self.shapeLayer.lineWidth = self.lineWidth
+        let path: UIBezierPath = UIBezierPath(ovalIn: self.shapeLayer.bounds)
+        self.shapeLayer.path = path.cgPath
     }
 }
